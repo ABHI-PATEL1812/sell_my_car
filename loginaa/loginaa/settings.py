@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'reglog',
     'users',
+    'phonenumber_field',
+    'carlist',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -124,3 +125,5 @@ USE_TZ = True
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, os.path.join('carlist', 'media'))
+MEDIA_URL = '/media/'

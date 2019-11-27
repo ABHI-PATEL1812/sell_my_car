@@ -1,8 +1,9 @@
 from django.urls import path, include
-from .views import SignUp
+from .views import SignUp, HomePageView
 
 
 urlpatterns = [
     path('signup/', SignUp.as_view(), name='signup'),
-    path('', include('reglog.urls')),
+    path('', HomePageView.as_view(), name='home'),
+    path('carlist', include('carlist.urls')),
 ]
