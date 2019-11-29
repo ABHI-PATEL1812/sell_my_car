@@ -15,5 +15,5 @@ class CarFimage(ModelForm):
 
     class Meta:
         model= CarImages
-        fields = ['image']
+        fields = ['id', 'image']
 

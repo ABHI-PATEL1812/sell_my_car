@@ -9,12 +9,11 @@
 {{fimg.errors}}
 <form action="carlist" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <table>
-    {{form.as_table}}
 
- </table>
-    <table>{{fimg.as_table}}</table>
+    {{freg.as_p}}
+    {{fimg.as_p}}
 
 <input type="submit" value="Submit" />
+
 </body>
 </html>

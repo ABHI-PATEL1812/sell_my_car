@@ -8,19 +8,21 @@
 <a href="{% url 'registration'%}">sell my car</a>
 <h1>carslist</h1>
 <table>
-    {{ form.errors}}
+    {{ users.errors}}
+    {{image.errors}}
     {% for item in users %}
 
     model:    {{ item.car_model }}<br><br>
-    fueltype  {{ item.fuel_type}}
-    Transmission type    {{ item.transmission_type }}<br><br>
+    fueltype  {{ item.get_fuel_type_display}}<br><br>
+    Transmission type    {{ item.get_transmission_type_display }}<br><br>
     price {{ item.price }}<br><br>
     milage:    {{ item.mil }}<br><br>
     current city:    {{ item.current_city }}<br><br>
     {% for img in image%}
-        {% if img.cars.id == item.id %}
-        image:</b><img src="{{img.image.url}}">
-        {%endif%}
+
+        image:</b><img src="{{img.image.url}}"><br>
+
+
         {%endfor%}
     </tr>
     <tr>
