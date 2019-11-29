@@ -10,10 +10,12 @@
 <p>Hi {{ user.username }} {{ user.id }}
 <p><a href="{% url 'logout' %}">Log out</a></p>
 <p><a href="{% url 'carlist'%}">Carlist</a></p>
+<p><a href="{% url 'registration'%}">sell my car</a></p>
 {% else %}
 <p><a href="{% url 'signup' %}">Sign Up</a></p>
 <p><a href="{% url 'login' %}">Log In </a></p>
 <p><a href="{% url 'carlist'%}">Carlist</a></p>
+
 {% endif %}
 
 

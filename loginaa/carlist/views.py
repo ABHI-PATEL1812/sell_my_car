@@ -10,20 +10,21 @@ from .forms import CarFsell, CarFimage
 def CarRegistration(request):
 
     form_reg = CarFsell
-    form_image = CarFimage
-    return render(request, 'registermycar.html', {'freg': form_reg, 'fimg': form_image})
+    return render(request, 'registermycar.html', {'freg': form_reg})
 
 
 def Carlist(request):
 
     if request.method == 'POST':
-        form = CarFsell(request.POST)
-        form2 = CarFimage(request.POST, request.FILES)
+        form = CarFsell(request.POST, request.FILES)
         if form.is_valid():
-            u = form.save()
-        if form2.is_valid():
-            u2 = form2.save()
 
-    users = Car.objects.all()
-    image = CarImages.objects.all()
-    return render(request, 'carlist.html', {'users': users, 'image': image})
+            u = form.save()
+            cars = Car.objects.all()
+            return render(request, 'carlist.html', {'cars': cars})
+        else:
+            form_reg = CarFsell
+            return render(request, 'registermycar.html', {'freg': form_reg})
+    else:
+        cars = Car.objects.all()
+        return render(request, 'carlist.html', {'cars': cars})

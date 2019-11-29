@@ -7,11 +7,10 @@
 <body>
 {{form.errors}}
 {{fimg.errors}}
+<h1>fill details about your car</h1>
 <form action="carlist" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-
     {{freg.as_p}}
-    {{fimg.as_p}}
 
 <input type="submit" value="Submit" />
 

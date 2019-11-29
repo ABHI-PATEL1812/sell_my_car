@@ -2,15 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Cars For Sell</title>
 </head>
 <body>
+{% if user.is_authenticated %}
 <a href="{% url 'registration'%}">sell my car</a>
-<h1>carslist</h1>
+{%else%}
+<h5>login or register to sell your car</h5>
+<p><a href="{% url 'signup' %}">Sign Up</a></p>
+<p><a href="{% url 'login' %}">Log In </a></p>
+{%endif%}
+
+<h1>cars for sell</h1>
 <table>
     {{ users.errors}}
     {{image.errors}}
-    {% for item in users %}
+    {% for item in cars %}
 
     model:    {{ item.car_model }}<br><br>
     fueltype  {{ item.get_fuel_type_display}}<br><br>
@@ -18,12 +25,15 @@
     price {{ item.price }}<br><br>
     milage:    {{ item.mil }}<br><br>
     current city:    {{ item.current_city }}<br><br>
-    {% for img in image%}
 
-        image:</b><img src="{{img.image.url}}"><br>
-
-
-        {%endfor%}
+     image <img src="{{item.image.url}}">
+    {%if item.image1%}
+    <img src="{{item.image1.url}}">
+    {%endif%}
+    {%if item.image2%}
+    <img src="{{item.image2.url}}"><br><br>
+    {%endif%}
+        <br><br>
     </tr>
     <tr>
     <td colspan="2" class="divider"><hr/></td>
