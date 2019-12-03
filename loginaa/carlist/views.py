@@ -18,9 +18,13 @@ def Carlist(request):
     if request.method == 'POST':
         form = CarFsell(request.POST, request.FILES)
         if form.is_valid():
-
-            u = form.save()
+            u = form.save(commit=False)
+            ab = request.user
+            u.added_by= ab
+            u.user_id = ab.id
+            u.save()
             cars = Car.objects.all()
+
             return render(request, 'carlist.html', {'cars': cars})
         else:
             form_reg = CarFsell

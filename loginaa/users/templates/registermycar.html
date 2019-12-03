@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{{form.errors}}
-{{fimg.errors}}
+{%extends 'base.html'%}
+{%block title%}fill your car details{%endblock%}
+{% load crispy_forms_tags%}
+
+{%block content%}
+<div class="container">
 <h1>fill details about your car</h1>
 <form action="carlist" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{freg.as_p}}
+    {{freg|crispy}}
 
-<input type="submit" value="Submit" />
-
-</body>
-</html>
+    <button type="submit" class="btn btn-success">Submit</button>
+<br><br><br>
+</form>
+    </div>
+{%endblock%}

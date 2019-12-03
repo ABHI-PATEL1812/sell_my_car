@@ -1,44 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cars For Sell</title>
-</head>
-<body>
-{% if user.is_authenticated %}
-<a href="{% url 'registration'%}">sell my car</a>
-{%else%}
-<h5>login or register to sell your car</h5>
-<p><a href="{% url 'signup' %}">Sign Up</a></p>
-<p><a href="{% url 'login' %}">Log In </a></p>
-{%endif%}
+{%extends 'base.html'%}
+    {%block title%}Cars For Sell{%endblock%}
+{%block content%}
 
-<h1>cars for sell</h1>
-<table>
-    {{ users.errors}}
-    {{image.errors}}
+
+<div class="container">
+    <h1>cars for sell</h1>
+<div class="col">
+    <div class="row">
     {% for item in cars %}
-
-    model:    {{ item.car_model }}<br><br>
-    fueltype  {{ item.get_fuel_type_display}}<br><br>
-    Transmission type    {{ item.get_transmission_type_display }}<br><br>
-    price {{ item.price }}<br><br>
-    milage:    {{ item.mil }}<br><br>
-    current city:    {{ item.current_city }}<br><br>
-
-     image <img src="{{item.image.url}}">
-    {%if item.image1%}
-    <img src="{{item.image1.url}}">
-    {%endif%}
-    {%if item.image2%}
-    <img src="{{item.image2.url}}"><br><br>
-    {%endif%}
-        <br><br>
-    </tr>
-    <tr>
-    <td colspan="2" class="divider"><hr/></td>
-    </tr>
-    {% endfor %}
-</table>
-</body>
-</html>
+    <br><br>
+  {%if item.user_id != user.id%}
+    <div class="card h-100" style="width:350px">
+     <div class="card-body">
+        <img class="card-img-top" src="{{item.image.url}}" alt="Card image" style="width:100%">
+        <h4 class="card-title">{{item.car_model}}</h4>
+         {{ item.user_id }}
+        <a  class="btn btn-primary">See Profile</a>
+    </div>
+        </div><br><br>
+{%endif%}
+    <br><br>
+    {%endfor%}
+</div>
+    </div>
+    </div>
+{%endblock%}

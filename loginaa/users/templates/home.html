@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Homepage</h1>
+{%extends 'base.html'%}
+{%block title%}Homepage{%endblock%}
+{%block content%}
+<div class="container">
 {% if user.is_authenticated %}
-<p>Hi {{ user.username }} {{ user.id }}
-<p><a href="{% url 'logout' %}">Log out</a></p>
-<p><a href="{% url 'carlist'%}">Carlist</a></p>
-<p><a href="{% url 'registration'%}">sell my car</a></p>
-{% else %}
-<p><a href="{% url 'signup' %}">Sign Up</a></p>
-<p><a href="{% url 'login' %}">Log In </a></p>
-<p><a href="{% url 'carlist'%}">Carlist</a></p>
-
-{% endif %}
+<h3>WELCOME {{user.username}}</h3>
+{%else%}
+<h3>WELCOME </h3>
+{%endif%}
+</div>
+{%endblock%}
 
 
-</body>
-</html>

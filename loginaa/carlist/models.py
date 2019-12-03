@@ -1,5 +1,8 @@
-from django.contrib import admin
 from django.contrib.auth.models import User
+
+from loginaa import settings
+from users.models import CustomUser
+from django.contrib import admin
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 import uuid
@@ -7,8 +10,8 @@ from PIL import Image
 from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import sys
-# Create your models here.
 
+# Create your models here.
 
 class CarCompany(models.Model):
     name = models.CharField(max_length=20)
@@ -78,6 +81,9 @@ class Car(models.Model):
     image = models.ImageField()
     image1 = models.ImageField(null=True, blank=True)
     image2 = models.ImageField(null=True, blank=True)
+    added_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
+    user_id = models.IntegerField(editable=False)
+
     def save(self):
         # Opening the uploaded image
         im = Image.open(self.image)

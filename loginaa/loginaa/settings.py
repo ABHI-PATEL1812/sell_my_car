@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'users',
     'phonenumber_field',
     'carlist',
+    'crispy_forms'
 ]
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
@@ -117,6 +118,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)
