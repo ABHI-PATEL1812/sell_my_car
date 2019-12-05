@@ -3,7 +3,7 @@
 {%block content%}
 <div class="container">
 {% if user.is_authenticated %}
-<h3>WELCOME {{user.username}}</h3>
+<h3>WELCOME {{user.username}}{{user.id}}</h3>
 {%else%}
 <h3>WELCOME </h3>
 {%endif%}

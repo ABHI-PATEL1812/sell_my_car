@@ -13,6 +13,7 @@ import sys
 
 # Create your models here.
 
+
 class CarCompany(models.Model):
     name = models.CharField(max_length=20)
 
@@ -34,16 +35,6 @@ class CarModel(models.Model):
 
 class CarModelAdmin(admin.ModelAdmin):
     list_display = ('c_model', 'c_name')
-
-
-class OwnerDetail(models.Model):
-
-    f_name = models.CharField(max_length=20, help_text='owner name')
-    mobile = PhoneNumberField(max_length=13, unique=True)
-    city = models.ForeignKey('CurrentCity', on_delete=models.SET_NULL, null=True)
-
-    def __str__(self):
-        return f'{self.f_name}'
 
 
 class CurrentCity(models.Model):
@@ -74,15 +65,47 @@ class Car(models.Model):
         choices=TRANSMISSION,
         default='m'
     )
+    KM_DRIVEN = (
+        ('a', '0-5000'),
+        ('b', '5000-10000'),
+        ('c', '10000-15000'),
+        ('d', '15000-25000'),
+        ('e', '25000-35000'),
+        ('f', '35000-50000'),
+        ('g', '50000-70000'),
+        ('h', '70000-100000'),
+    )
+    km_driven = models.CharField(
+        max_length=1,
+        choices=KM_DRIVEN,
+
+    )
+    REGISTRATION_YEAR = (
+        ('a','2010'),
+        ('b', '2011'),
+        ('c', '2012'),
+        ('d', '2013'),
+        ('e', '2014'),
+        ('f', '2015'),
+        ('g', '2016'),
+        ('h', '2017'),
+        ('h', '2018'),
+        ('h', '2019'),
+    )
+    reg_year = models.CharField(
+        max_length=1,
+        choices=REGISTRATION_YEAR,
+
+    )
     price = models.IntegerField(default=0)
     mil = models.FloatField(default=0)
     current_city = models.ForeignKey('CurrentCity', on_delete=models.SET_NULL, null=True)
-    owner_detail = models.ForeignKey('OwnerDetail', on_delete=models.SET_NULL, null=True)
     image = models.ImageField()
     image1 = models.ImageField(null=True, blank=True)
     image2 = models.ImageField(null=True, blank=True)
     added_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
-    user_id = models.IntegerField(editable=False)
+    user_id = models.IntegerField()
+
 
     def save(self):
         # Opening the uploaded image
@@ -112,7 +135,7 @@ class Car(models.Model):
             self.image1 = InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % self.id, 'image/jpeg',
                                           sys.getsizeof(output), None)
 
-          #thied image
+          #third image
         if self.image2:
             im2 = Image.open(self.image2)
             output = BytesIO()
@@ -128,8 +151,3 @@ class Car(models.Model):
         return f'{self.car_model},{self.id}'
 
 
-class CarImages(models.Model):
-    image = models.ImageField()
-
-    def __str__(self):
-        return f'{self}'
