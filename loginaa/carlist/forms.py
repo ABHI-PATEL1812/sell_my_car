@@ -8,6 +8,6 @@ class CarFsell(ModelForm):
 
     class Meta:
         model = Car
-        fields = ['car_model', 'fuel_type', 'transmission_type', 'price', 'mil', 'current_city', 'image', 'image1','image2']
+        fields = ['car_model', 'fuel_type', 'transmission_type', 'reg_year', 'km_driven', 'price', 'mil', 'current_city', 'image', 'image1','image2']
 
 

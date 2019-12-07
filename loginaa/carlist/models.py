@@ -65,21 +65,6 @@ class Car(models.Model):
         choices=TRANSMISSION,
         default='m'
     )
-    KM_DRIVEN = (
-        ('a', '0-5000'),
-        ('b', '5000-10000'),
-        ('c', '10000-15000'),
-        ('d', '15000-25000'),
-        ('e', '25000-35000'),
-        ('f', '35000-50000'),
-        ('g', '50000-70000'),
-        ('h', '70000-100000'),
-    )
-    km_driven = models.CharField(
-        max_length=1,
-        choices=KM_DRIVEN,
-
-    )
     REGISTRATION_YEAR = (
         ('a','2010'),
         ('b', '2011'),
@@ -95,10 +80,11 @@ class Car(models.Model):
     reg_year = models.CharField(
         max_length=1,
         choices=REGISTRATION_YEAR,
-
+        default='h',
     )
-    price = models.IntegerField(default=0)
-    mil = models.FloatField(default=0)
+    km_driven = models.IntegerField(null=False)
+    price = models.IntegerField(null=False)
+    mil = models.FloatField(null=False)
     current_city = models.ForeignKey('CurrentCity', on_delete=models.SET_NULL, null=True)
     image = models.ImageField()
     image1 = models.ImageField(null=True, blank=True)
@@ -151,3 +137,9 @@ class Car(models.Model):
         return f'{self.car_model},{self.id}'
 
 
+class Likes(models.Model):
+    liked_car_id = models.CharField(max_length=60)
+    liking_user =models.IntegerField()
+
+    def __str__(self):
+        return self.liked_car_id

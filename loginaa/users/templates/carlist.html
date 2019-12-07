@@ -13,9 +13,9 @@
     <div class="card h-100" style="width:350px; margin-right:8px; margin-bottom:8px;border-width:medium;">
      <div class="card-body">
         <img class="card-img-top" src="{{item.image.url}}" alt="Card image" style="width:100%">
-        <h4 class="card-title">{{item.car_model}}</h4>
-         {{ item.user_id }}
-        <a href="{% url 'cardetail' item.id%}">See Profile</a>
+        <h4 class="card-title">{{item.get_reg_year_display}} {{item.car_model}}</h4>
+
+        <a href="{% url 'cardetail' item.id%}">See Car</a>
     </div>
         </div><br><br>
 <!--{%endif%}-->

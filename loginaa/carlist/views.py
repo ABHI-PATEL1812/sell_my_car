@@ -1,5 +1,5 @@
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 
 # Create your views here.
@@ -25,14 +25,14 @@ def Carlist(request):
             u.user_id = ab.id
             u.save()
             cars = Car.objects.filter(user_id=ab.id)
-            return render(request, 'myregcars.html', {'cars': cars})
+            return redirect(Myregisteredcar)
         else:
             form_reg = CarFsell
             return render(request, 'registermycar.html', {'freg': form_reg})
     else:
         ab = request.user
         cars = Car.objects.filter(~Q(user_id=ab.id))
-        return render(request, 'carlist.html', {'cars': cars})
+        return render(request,'carlist.html', {'cars': cars})
 
 
 def Myregisteredcar(request):
@@ -44,3 +44,16 @@ def Myregisteredcar(request):
 def Cardetail(request, pk):
     cars =Car.objects.filter(id=pk)
     return render(request, 'cardetail.html', {'cars':cars})
+
+
+def Likeoncar(request):
+
+    if request.method == 'GET':
+        likedcar_id = request.GET['car_id']
+        likinguser = request.user.id
+        try:
+            likedcar_obj = Likes.objects.get(liked_car_id=likedcar_id, liking_user=likinguser)
+            likedcar_obj.delete()
+        except Likes.DoesNotExist:
+            like = Likes.objects.create(liked_car_id=likedcar_id, liking_user=likinguser)
+

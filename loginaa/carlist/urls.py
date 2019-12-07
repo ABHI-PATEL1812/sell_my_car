@@ -7,4 +7,5 @@ urlpatterns = [
     path('registration', views.CarRegistration, name='registration'),
     path('myregcars',views.Myregisteredcar, name='myregcars'),
     path('myregcars/(?<pk>\d+)', views.Cardetail, name='cardetail'),
+    path('like', views.Likeoncar, name='like'),
 ]
