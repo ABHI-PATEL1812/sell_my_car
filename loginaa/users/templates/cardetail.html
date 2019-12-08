@@ -61,58 +61,65 @@
          <div class="row">
              <img src="/media/static/car.svg" style="height:32px; width:32px;margin-left:42px;opacity:50%;">
              <div class="col"style="width:100px;">
-                 <h6 style="opacity:50%; margin-left:2px; width:100px;">Car Model</h6>
-                 <h6 style="margin-left:2px; width:100px;">{{item.car_model.c_model}}</h6>
+                 <h6 style="opacity:50%; margin-left:2px; width:100px;margin-bottom:0px;">Car Model</h6>
+                 <h6 style="margin-left:2px; width:100px;"><b>{{item.car_model.c_model}}</b></h6>
              </div>
              <img src="/media/static/factory.svg" style="height:32px; width:32px; margin-left:130px;opacity:50%">
              <div class="col"style="width:100px;">
-                 <h6 style="opacity:50%; margin-left:2px; width:100px;">Manufacturer</h6>
-                 <h6 style="margin-left:2px; width:100px;">{{item.car_model.c_name.name}}</h6>
+                 <h6 style="opacity:50%; margin-left:2px; width:100px;margin-bottom:0px;">Manufacturer</h6>
+                 <h6 style="margin-left:2px; width:100px;"><b>{{item.car_model.c_name.name}}</b></h6>
              </div>
          </div><br>
 <!--         2-->
          <div class="row">
              <img src="/media/static/milestone.svg" style="height:32px; width:32px; margin-left:42px;opacity:50%">
              <div class="col"style="width:100px;">
-                 <h6 style="opacity:50%; margin-left:2px; width:100px;">Mileage</h6>
-                 <h6 style="margin-left:2px; width:100px;">{{item.mil}} Kmpl</h6>
+                 <h6 style="opacity:50%; margin-left:2px; width:100px;margin-bottom:0px;">Mileage</h6>
+                 <h6 style="margin-left:2px; width:100px;"><b>{{item.mil}} Kmpl</b></h6>
              </div>
              <img src="/media/static/calendar.svg" style="height:32px; width:32px;margin-left:130px;opacity:50%;">
              <div class="col"style="width:100px;">
                  <h6 style="opacity:50%; margin-left:2px; width:100px;">Year</h6>
-                 <h6 style="margin-left:2px; width:100px;">{{item.get_reg_year_display}}</h6>
+                 <h6 style="margin-left:2px; width:100px;"><b>{{item.get_reg_year_display}}</b></h6>
              </div>
          </div><br>
          <!--3-->
          <div class="row">
              <img src="/media/static/road.svg" style="height:32px; width:32px;margin-left:42px;opacity:50%;">
              <div class="col"style="width:100px;">
-                 <h6 style="opacity:50%; margin-left:2px; width:100px;">KMs Driven</h6>
-                 <h6 style="margin-left:2px; width:100px;">{{item.km_driven}}</h6>
+                 <h6 style="opacity:50%; margin-left:2px; width:100px;margin-bottom:0px;">KMs Driven</h6>
+                 <h6 style="margin-left:2px; width:100px;"><b>{{item.km_driven}}</b></h6>
              </div>
              <img src="/media/static/gearbox.svg" style="height:32px; width:32px; margin-left:130px;opacity:55%">
              <div class="col"style="width:100px;">
-                 <h6 style="opacity:50%; margin-left:2px; width:100px;">Tramsmission</h6>
-                 <h6 style="margin-left:2px; width:100px;">{{item.get_transmission_type_display}}</h6>
+                 <h6 style="opacity:50%; margin-left:2px; width:100px;margin-bottom:0px;">Tramsmission</h6>
+                 <h6 style="margin-left:2px; width:100px;"><b>{{item.get_transmission_type_display}}</b></h6>
              </div>
          </div><br>
          <!--4-->
          <div class="row">
              <img src="/media/static/price.svg" style="height:32px; width:32px;margin-left:42px;opacity:50%;">
              <div class="col"style="width:100px;">
-                 <h6 style="opacity:50%; margin-left:2px; width:100px;">Price</h6>
-                 <h6 style="margin-left:2px; width:100px;">{{item.price}}</h6>
+                 <h6 style="opacity:50%; margin-left:2px; width:100px;margin-bottom:0px;">Price</h6>
+                 <h6 style="margin-left:2px; width:100px;"><b>{{item.price}}</b></h6>
              </div>
              <img src="/media/static/gasoline-pump.svg" style="height:32px; width:32px; margin-left:130px;opacity:40%">
              <div class="col"style="width:100px;">
-                 <h6 style="opacity:50%; margin-left:2px; width:100px;">Fuel Type</h6>
-                 <h6 style="margin-left:2px; width:100px;">{{item.get_fuel_type_display}}</h6>
+                 <h6 style="opacity:50%; margin-left:2px; width:100px;margin-bottom:0px;">Fuel Type</h6>
+                 <h6 style="margin-left:2px; width:100px;"><b>{{item.get_fuel_type_display}}</b></h6>
              </div>
          </div>
 <!--like button -->
-         <a class="likebutton btn btn-primary btn-lg" id="like{{ item.id }}"  data-catid="{{ item.id }}">Like</a>
-          <p id="message{{item.id}}">
-         </p>
+      {%if item.user_id != user.id %}
+         <a class="likebutton btn btn-primary btn-lg" style="margin-left:260px;" id="like{{ item.id }}"  data-catid="{{ item.id }}">Like</a>
+          <p id="message{{item.id}}"></p>
+         {%endif%}
+         {%if item.user_id == user.id %}
+      <div class="row">
+          <a class="btn btn-info" href="{% url 'updatecar' item.id%}" id="{{item.id}}" style="margin-left:230px;">EDIT</a>
+           <a class="btn btn-danger" href="{%url 'deletecar' item.id%}" style="margin-left:24px;">DELETE</a>
+      </div>
+      {%endif%}
      </div>
     </div>
 <!---->

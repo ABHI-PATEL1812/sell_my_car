@@ -5,7 +5,7 @@
 {%block content%}
 <div class="container">
 <h1>fill details about your car</h1>
-<form action="carlist" method="post" enctype="multipart/form-data">
+<form  method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{freg|crispy}}
 

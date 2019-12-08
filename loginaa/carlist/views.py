@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 
@@ -56,4 +57,29 @@ def Likeoncar(request):
             likedcar_obj.delete()
         except Likes.DoesNotExist:
             like = Likes.objects.create(liked_car_id=likedcar_id, liking_user=likinguser)
+
+def Updatecar(request, pk):
+    car_obj = Car.objects.get(id=pk)
+    car_form =  CarFsell(request.POST or None, instance=car_obj)
+    if request.method == 'POST':
+        if car_form.is_valid():
+            u = car_form.save(commit=False)
+            u.added_by = request.user
+            u.user_id = request.user.id
+            u.save()
+            cars = Car.objects.filter(id=pk)
+            return redirect(Cardetail, pk)
+        else:
+            return render(request, 'registermycar.html', {'freg': car_form})
+    else:
+        return render(request, 'registermycar.html', {'freg': car_form})
+
+
+def Deletecar(request, pk):
+    try:
+        car_obj = Car.objects.get(id=pk)
+    except Car.DoesNotExist:
+        return HttpResponse('car not exist')
+    car_obj.delete()
+    return redirect(Myregisteredcar)
 
